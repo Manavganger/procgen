@@ -15,7 +15,7 @@ class SimpleRoom
         std::vector<Room> rooms;
 
     public:
-        SimpleRoom(int**);
+        SimpleRoom(int** tiles, int numRooms, Size minSize, Size maxSize);
 };
 
 #endif 

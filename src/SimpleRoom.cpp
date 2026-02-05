@@ -1,7 +1,8 @@
 #include "../header/SimpleRoom.hpp"
 
-// Constructor definition
-SimpleRoom::SimpleRoom(int** t) 
+// Constructor
+SimpleRoom::SimpleRoom(int** tiles, int numRooms, Size minSize, Size maxSize)
 {
-    tiles = t;
+    tiles = tiles;
 }
+

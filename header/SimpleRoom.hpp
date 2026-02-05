@@ -12,10 +12,15 @@ class SimpleRoom
         int numRooms;
         Size minSize;
         Size maxSize;
+        Size gridSize;
         std::vector<Room> rooms;
 
+        void drawRoom(const Room&);
+        bool checkCollision(const Room& newRoom);
+
     public:
-        SimpleRoom(int** tiles, int numRooms, Size minSize, Size maxSize);
+        SimpleRoom(int** tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
+        void createRooms(void);
 };
 
 #endif 

@@ -3,9 +3,12 @@
 
 struct Room
 {
-    int length;
-    int width;
-    int pos;        // position defined as top left tile
+    int xlen;
+    int ylen;
+    
+    // position defined as top left tile
+    int xpos;        
+    int ypos;
 };
 
 #endif

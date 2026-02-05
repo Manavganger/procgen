@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "../header/SimpleRoom.hpp"
 
 sf::Color valueToColorMap(int value)
 {
@@ -26,6 +27,13 @@ int main()
     );
 
     int tiles[rows][cols] = {}; // init to zero
+    int* tilesPtr[rows];
+    for (int i = 0; i < rows; ++i)
+        tilesPtr[i] = tiles[i];
+        
+    //procgen logic goes here
+    SimpleRoom sr(tilesPtr, 5, {1, 5}, {1, 5}, {rows, cols});
+    sr.createRooms();
 
     sf::RectangleShape tile({tileSize, tileSize});
 

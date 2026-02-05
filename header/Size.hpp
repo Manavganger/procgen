@@ -8,4 +8,4 @@ struct Size
     int cols;
 };
 
-#endif SIZE_HPP
+#endif

@@ -12,11 +12,11 @@ sf::Color valueToColorMap(int value)
 
 int main()
 {
-    const int tileSize = 30;
+    const int tileSize = 10;
     const int gap = 1;
     const int margin = 10; // can remove later
-    const int cols = 45;
-    const int rows = 25;
+    const int cols = 120;
+    const int rows = 75;
 
     const int windowWidth  = margin * 2 + cols * tileSize + (cols - 1) * gap;
     const int windowHeight = margin * 2 + rows * tileSize + (rows - 1) * gap;
@@ -30,9 +30,9 @@ int main()
     int* tilesPtr[rows];
     for (int i = 0; i < rows; ++i)
         tilesPtr[i] = tiles[i];
-        
+
     //procgen logic goes here
-    SimpleRoom sr(tilesPtr, 5, {1, 5}, {1, 5}, {rows, cols});
+    SimpleRoom sr(tilesPtr, 10, {5, 5}, {13, 13}, {rows, cols});
     sr.createRooms();
 
     sf::RectangleShape tile({tileSize, tileSize});

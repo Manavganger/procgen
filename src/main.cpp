@@ -11,11 +11,11 @@ sf::Color valueToColorMap(int value)
 
 int main()
 {
-    const int tileSize = 40;
+    const int tileSize = 30;
     const int gap = 1;
     const int margin = 10; // can remove later
-    const int cols = 20;
-    const int rows = 20;
+    const int cols = 45;
+    const int rows = 25;
 
     const int windowWidth  = margin * 2 + cols * tileSize + (cols - 1) * gap;
     const int windowHeight = margin * 2 + rows * tileSize + (rows - 1) * gap;

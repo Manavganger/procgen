@@ -2,20 +2,42 @@
 
 int main()
 {
-	sf::RenderWindow window( sf::VideoMode( { 200, 200 } ), "SFML works!" );
-	sf::CircleShape shape( 100.f );
-	shape.setFillColor( sf::Color::Green );
+    const int tileSize = 20;
+    const int cols = 10;
+    const int rows = 10;
 
-	while ( window.isOpen() )
-	{
-		while ( const std::optional event = window.pollEvent() )
-		{
-			if ( event->is<sf::Event::Closed>() )
-				window.close();
-		}
+    sf::RenderWindow window(
+        sf::VideoMode({cols * tileSize, rows * tileSize}),
+        "Tile Grid"
+    );
 
-		window.clear();
-		window.draw( shape );
-		window.display();
-	}
+    sf::RectangleShape tile({tileSize, tileSize});
+    tile.setFillColor(sf::Color(98, 98, 98, 255));
+
+    while (window.isOpen())
+    {
+        while (const auto event = window.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
+                window.close();
+        }
+
+        window.clear(sf::Color::Black);
+
+        for (int y = 0; y < rows; ++y)
+        {
+            for (int x = 0; x < cols; ++x)
+            {
+                tile.setPosition({
+                    static_cast<float>(x * tileSize),
+                    static_cast<float>(y * tileSize)
+				});
+                window.draw(tile);
+            }
+        }
+
+        window.display();
+    }
+
+    return 0;
 }

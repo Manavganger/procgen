@@ -1,10 +1,19 @@
 #include <SFML/Graphics.hpp>
 
+sf::Color valueToColorMap(int value)
+{
+    switch (value)
+    {
+        case 1: return sf::Color(150, 150, 150);	//open space
+        default: return sf::Color(70, 70, 70);		//default should be a wall, not an open space
+    }
+}
+
 int main()
 {
-    const int tileSize = 30;
-    const int gap = 4;        // space between tiles
-    const int margin = 10;    // space around the grid, can remove later
+    const int tileSize = 40;
+    const int gap = 1;
+    const int margin = 10; // can remove later
     const int cols = 20;
     const int rows = 20;
 
@@ -16,24 +25,29 @@ int main()
         "Tile Grid"
     );
 
+    int tiles[rows][cols] = {}; // init to zero
+
     sf::RectangleShape tile({tileSize, tileSize});
-    tile.setFillColor(sf::Color(98, 98, 98));
 
     while (window.isOpen())
     {
-        while (const auto event = window.pollEvent())
+        while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
 
-		// CLEAR DRAW DISPLAY LOOP
+		// clear, draw, display loop
+
         window.clear(sf::Color(30, 30, 30));
 
         for (int y = 0; y < rows; ++y)
         {
             for (int x = 0; x < cols; ++x)
             {
+                tile.setFillColor(valueToColorMap(tiles[y][x]));
+
+				// set position based on top left corner 
                 tile.setPosition({
                     static_cast<float>(margin + x * (tileSize + gap)),
                     static_cast<float>(margin + y * (tileSize + gap))

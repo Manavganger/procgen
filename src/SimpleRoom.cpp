@@ -31,8 +31,13 @@ void SimpleRoom::createRooms(void)
     for (int i = 0; i < numRooms; ++i)
     {
         Room currRoom{};
+        int attempts = 0;
         do 
         {
+            // if too many attempts, early return to prevent infinite loop
+            ++attempts;
+            if (attempts >= 100000) return;
+            
             // generate room size in accordance to specification
             int xlen = rand() % (maxSize.cols - minSize.cols + 1) + minSize.cols;
             int ylen = rand() % (maxSize.rows - minSize.rows + 1) + minSize.rows;

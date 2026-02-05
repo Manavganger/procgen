@@ -10,13 +10,14 @@ SimpleRoom::SimpleRoom(int** tiles, int numRooms, Size minSize, Size maxSize, Si
 
 bool SimpleRoom::checkCollision(const Room& newRoom)
 {
+    const Room& nr = newRoom;
     for (const auto& r : rooms)
     {
         bool overlap = !( 
-            newRoom.xpos + newRoom.xlen + 1 < r.xpos or   
-            newRoom.xpos > r.xpos + r.xlen + 1 or    
-            newRoom.ypos + newRoom.ylen + 1 < r.ypos or 
-            newRoom.ypos > r.ypos + r.ylen + 1          
+            nr.xpos + nr.xlen + 1 < r.xpos or   
+            nr.xpos > r.xpos + r.xlen + 1 or    
+            nr.ypos + nr.ylen + 1 < r.ypos or 
+            nr.ypos > r.ypos + r.ylen + 1          
         );
 
         if (overlap)

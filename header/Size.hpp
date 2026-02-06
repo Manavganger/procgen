@@ -4,8 +4,7 @@
 // does NOT specify location, only size
 struct Size
 {
-    int rows;
-    int cols;
+    int rows, cols;
 };
 
 #endif

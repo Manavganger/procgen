@@ -11,9 +11,7 @@ class SimpleRoom
         int** tiles;
         std::vector<Room> rooms;
         const int numRooms;
-        const Size minSize;
-        const Size maxSize;
-        const Size gridSize;
+        const Size minSize, maxSize, gridSize;
 
         void drawRoom(const Room&);
         bool checkCollision(const Room& newRoom);

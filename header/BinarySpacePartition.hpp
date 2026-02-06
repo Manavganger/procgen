@@ -6,6 +6,7 @@ class BinarySpacePartition: public SimpleRoom
 {
     public:
         BinarySpacePartition(int** tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
+        void createRooms() override;
 };
 
 #endif

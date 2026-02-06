@@ -26,6 +26,7 @@ int main()
         "Tile Grid"
     );
 
+    // for some reason you have to do this to prevent type decay
     int tiles[rows][cols] = {}; // init to zero
     int* tilesPtr[rows];
     for (int i = 0; i < rows; ++i)
@@ -46,7 +47,6 @@ int main()
         }
 
 		// clear, draw, display loop
-
         window.clear(sf::Color(30, 30, 30));
 
         for (int y = 0; y < rows; ++y)

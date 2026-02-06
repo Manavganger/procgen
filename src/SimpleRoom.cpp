@@ -53,8 +53,7 @@ void SimpleRoom::createRooms(void)
 
         drawRoom(currRoom);
     }
-    
-    // REPLACE YOUR SEQUENTIAL LOOP WITH THIS CALL:
+
     if (!rooms.empty()) {
         connectRoomsPrims();
     }

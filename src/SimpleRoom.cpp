@@ -11,6 +11,7 @@ SimpleRoom::SimpleRoom(int** tiles, int numRooms, Size minSize, Size maxSize, Si
 bool SimpleRoom::checkCollision(const Room& newRoom)
 {
     const Room& nr = newRoom;
+
     for (const auto& r : rooms)
     {
         bool overlap = !( 
@@ -37,7 +38,7 @@ void SimpleRoom::createRooms(void)
             // if too many attempts, early return to prevent infinite loop
             ++attempts;
             if (attempts >= 100000) return;
-            
+
             // generate room size in accordance to specification
             int xlen = rand() % (maxSize.cols - minSize.cols + 1) + minSize.cols;
             int ylen = rand() % (maxSize.rows - minSize.rows + 1) + minSize.rows;
@@ -58,6 +59,11 @@ void SimpleRoom::createRooms(void)
 
         drawRoom(currRoom);
     }
+    
+    for (size_t i = 1; i < rooms.size(); ++i)
+    {
+        drawCorridors(rooms[i - 1], rooms[i]);
+    }
 }
 
 void SimpleRoom::drawRoom(const Room& room)
@@ -76,4 +82,18 @@ void SimpleRoom::drawRoom(const Room& room)
             tiles[r][c] = 1;
         }
     }
+}
+
+void SimpleRoom::drawCorridors(const Room& room1, const Room& room2)
+{
+    int x1 = room1.xpos + room1.xlen / 2;
+    int y1 = room1.ypos + room1.ylen / 2;
+    int x2 = room2.xpos + room2.xlen / 2;
+    int y2 = room2.ypos + room2.ylen / 2;
+
+    for (int c = std::min(x1, x2); c <= std::max(x1, x2); ++c)
+        tiles[y1][c] = 1;
+
+    for (int r = std::min(y1, y2); r <= std::max(y1, y2); ++r)
+        tiles[r][x2] = 1;
 }

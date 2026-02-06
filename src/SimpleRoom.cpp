@@ -3,7 +3,7 @@
 #include <ctime>   
 
 // Constructor
-SimpleRoom::SimpleRoom(int** tiles, int numRooms, Size minSize, Size maxSize, Size gridSize)
+SimpleRoom::SimpleRoom(int** tiles, const int numRooms, const Size minSize, const Size maxSize, const Size gridSize)
     : tiles(tiles), numRooms(numRooms), minSize(minSize), maxSize(maxSize), gridSize(gridSize)
 {
     std::srand(static_cast<unsigned int>(std::time(0)));
@@ -91,6 +91,9 @@ void SimpleRoom::drawCorridors(const Room& room1, const Room& room2)
         tiles[r][x2] = 1;
 }
 
+
+// Note: using prims algo will ensure no cycles in the 'graph'. This means that the end result will have lots of "choke points"
+// To avoid this, simple connect rooms with L corridors as they appear in the rooms vector
 void SimpleRoom::connectRoomsPrims() 
 {
     int n = rooms.size();

@@ -6,12 +6,12 @@
 class PerlinNoise
 {
     private:
-        int** tiles;
+        GID_MAX* tiles;
         Size gridSize;
 
     public:
-        PerlinNoise(int** tiles, Size gridSize);
-        generateNoise();
+        PerlinNoise(GridPtr& tiles, Size gridSize);
+        void generateNoise(void);
 };
 
 #endif

@@ -6,6 +6,8 @@ sf::Color valueToColorMap(int value)
     switch (value)
     {
         case 1: return sf::Color(150, 150, 150);	//open space
+        case 2: return sf::Color::Blue;
+        case 3: return sf::Color::Green;
         default: return sf::Color(70, 70, 70);		//default should be a wall, not an open space
     }
 }

@@ -1,5 +1,5 @@
-#ifndef SIMPLEROOM_HPP
-#define SIMPLEROOM_HPP
+#ifndef SIMPLE_ROOM_HPP
+#define SIMPLE_ROOM_HPP
 
 #include "Size.hpp"
 #include "Room.hpp"

@@ -1,5 +1,5 @@
-#ifndef BINARYSPACEPARTITION_HPP
-#define BINARYSPACEPARTITION_HPP
+#ifndef BINARY_SPACE_PARTITION_HPP
+#define BINARY_SPACE_PARTITION_HPP
 
 #include "SimpleRoom.hpp"
 #include "BSPNode.hpp"

@@ -1,4 +1,4 @@
-#ifdef PERLIN_NOISE_HPP
+#ifndef PERLIN_NOISE_HPP
 #define PERLIN_NOISE_HPP
 
 #include "Size.hpp"
@@ -7,8 +7,11 @@
 class PerlinNoise
 {
     private:
+        int** tiles;
+        Size gridSize;
 
     public:
+        PerlinNoise(int** tiles, Size gridSize);
 };
 
 #endif

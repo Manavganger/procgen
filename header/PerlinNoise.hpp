@@ -10,7 +10,7 @@ class PerlinNoise
         Size gridSize;
 
     public:
-        PerlinNoise(GridPtr& tiles, Size gridSize);
+        PerlinNoise(GridPtr tiles, Size gridSize);
         void generateNoise(void);
 };
 

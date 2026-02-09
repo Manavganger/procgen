@@ -16,7 +16,7 @@ class SimpleRoom
         void connectRoomsPrims(void);
 
     public:
-        SimpleRoom(GridPtr& tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
+        SimpleRoom(GridPtr tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
         void createRooms(void);
 };
 

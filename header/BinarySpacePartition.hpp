@@ -13,7 +13,7 @@ private:
     Room createRoomInLeaf(const BSPNode* leaf);
 
 public:
-    BinarySpacePartition(GridPtr& tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
+    BinarySpacePartition(GridPtr tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
 
     void split(BSPNode* node);
     void createRoomsBSP(BSPNode* node);

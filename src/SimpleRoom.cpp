@@ -3,7 +3,7 @@
 #include <ctime>   
 
 // Constructor
-SimpleRoom::SimpleRoom(GridPtr& tiles, const int numRooms, const Size minSize, const Size maxSize, const Size gridSize)
+SimpleRoom::SimpleRoom(GridPtr tiles, const int numRooms, const Size minSize, const Size maxSize, const Size gridSize)
     : tiles(tiles), numRooms(numRooms), minSize(minSize), maxSize(maxSize), gridSize(gridSize)
 {
     std::srand(static_cast<unsigned int>(std::time(0)));

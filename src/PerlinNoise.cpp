@@ -1,6 +1,6 @@
 #include "../header/PerlinNoise.hpp"
 
-PerlinNoise::PerlinNoise(GridPtr& tiles, Size gridSize): tiles(tiles), gridSize(gridSize)
+PerlinNoise::PerlinNoise(GridPtr tiles, Size gridSize): tiles(tiles), gridSize(gridSize)
 {
     // leave empty 
 }
@@ -10,5 +10,5 @@ PerlinNoise::PerlinNoise(GridPtr& tiles, Size gridSize): tiles(tiles), gridSize(
 // water, 3 maps to land. 
 void PerlinNoise::generateNoise(void)
 {
-
+    
 }

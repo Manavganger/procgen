@@ -3,7 +3,7 @@
 #include <ctime>
 #include <algorithm>
 
-BinarySpacePartition::BinarySpacePartition(int** tiles, int numRooms, Size minSize, Size maxSize, Size gridSize)
+BinarySpacePartition::BinarySpacePartition(GridPtr& tiles, int numRooms, Size minSize, Size maxSize, Size gridSize)
     : SimpleRoom(tiles, numRooms, minSize, maxSize, gridSize)
 {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));

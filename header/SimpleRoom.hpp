@@ -5,7 +5,6 @@
 class SimpleRoom
 {
     protected:
-        // instead of int**, use nested vectors. shared_ptr is there to prevent constructor from copying tiles grid, since we want a reference to modify the original grid
         std::shared_ptr<std::vector<std::vector<int>>> tiles; 
         std::vector<Room> rooms;
         const int numRooms;

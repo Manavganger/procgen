@@ -31,7 +31,7 @@ int main()
     );
 
     //procgen logic goes here
-    SimpleRoom sr(tiles, 65, {5, 5}, {13, 13}, {rows, cols});
+    SimpleRoom sr(tiles, 35, {5, 5}, {13, 13}, {rows, cols});
     sr.createRooms();
 
     sf::RectangleShape tile({tileSize, tileSize});

@@ -1,8 +1,7 @@
 #ifndef PERLIN_NOISE_HPP
 #define PERLIN_NOISE_HPP
 
-#include "Size.hpp"
-#include "Vector.hpp"
+#include "Common.hpp"
 
 class PerlinNoise
 {

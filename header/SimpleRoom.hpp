@@ -1,10 +1,7 @@
 #ifndef SIMPLE_ROOM_HPP
 #define SIMPLE_ROOM_HPP
 
-#include "Size.hpp"
-#include "Room.hpp"
-#include <vector>
-#include <memory>
+#include "Common.hpp"
 class SimpleRoom
 {
     protected:

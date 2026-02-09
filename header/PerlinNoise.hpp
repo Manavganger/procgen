@@ -6,7 +6,7 @@
 class PerlinNoise
 {
     private:
-        GID_MAX* tiles;
+        GridPtr tiles;
         Size gridSize;
 
     public:

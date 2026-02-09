@@ -5,7 +5,7 @@
 class SimpleRoom
 {
     protected:
-        std::shared_ptr<std::vector<std::vector<int>>> tiles; 
+        GridPtr tiles; 
         std::vector<Room> rooms;
         const int numRooms;
         const Size minSize, maxSize, gridSize;
@@ -16,7 +16,7 @@ class SimpleRoom
         void connectRoomsPrims(void);
 
     public:
-        SimpleRoom(std::shared_ptr<std::vector<std::vector<int>>>& tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
+        SimpleRoom(GridPtr& tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
         void createRooms(void);
 };
 

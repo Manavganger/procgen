@@ -26,7 +26,7 @@ int main()
         "Tile Grid"
     );
 
-    auto tiles = std::make_shared<std::vector<std::vector<int>>>(
+    auto tiles = std::make_shared<TileGrid>(
         rows, std::vector<int>(cols, 0)
     );
 

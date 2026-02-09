@@ -4,8 +4,6 @@
 #include <vector>
 #include <memory>
 
-using TileGrid = std::vector<std::vector<int>>;
-using GridPtr = std::shared_ptr<TileGrid>;
 
 // does NOT specify location, only size
 struct Size
@@ -23,5 +21,16 @@ struct Room
     int xlen, ylen;
     int xpos, ypos;      // position defined as top left tile
 };
+
+enum class TileType
+{
+    Wall = 0,
+    Open = 1,
+    Water = 2, 
+    Grass = 3
+};
+
+using TileGrid = std::vector<std::vector<TileType>>;
+using GridPtr = std::shared_ptr<TileGrid>;
 
 #endif

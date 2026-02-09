@@ -1,14 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include "../header/SimpleRoom.hpp"
 
-sf::Color valueToColorMap(int value)
+sf::Color valueToColorMap(TileType value)
 {
     switch (value)
     {
-        case 1: return sf::Color(150, 150, 150);	//open space
-        case 2: return sf::Color::Blue;
-        case 3: return sf::Color::Green;
-        default: return sf::Color(70, 70, 70);		//default should be a wall, not an open space
+        case TileType::Open:  return sf::Color(150, 150, 150);
+        case TileType::Water: return sf::Color::Blue;
+        case TileType::Grass: return sf::Color::Green;
+        default:              return sf::Color(70, 70, 70);		//default should be a wall, not an open space
     }
 }
 
@@ -29,7 +29,7 @@ int main()
     );
 
     auto tiles = std::make_shared<TileGrid>(
-        rows, std::vector<int>(cols, 0)
+        rows, std::vector<TileType>(cols, TileType::Wall)
     );
 
     //procgen logic goes here

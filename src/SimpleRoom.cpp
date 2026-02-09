@@ -3,7 +3,7 @@
 #include <ctime>   
 
 // Constructor
-SimpleRoom::SimpleRoom(int** tiles, const int numRooms, const Size minSize, const Size maxSize, const Size gridSize)
+SimpleRoom::SimpleRoom(std::shared_ptr<std::vector<std::vector<int>>>& tiles, const int numRooms, const Size minSize, const Size maxSize, const Size gridSize)
     : tiles(tiles), numRooms(numRooms), minSize(minSize), maxSize(maxSize), gridSize(gridSize)
 {
     std::srand(static_cast<unsigned int>(std::time(0)));
@@ -72,7 +72,7 @@ void SimpleRoom::drawRoom(const Room& room)
     {
         for (int c = room.xpos; c < room.xpos + room.xlen; ++c)
         {
-            tiles[r][c] = 1;
+            (*tiles)[r][c] = 1;
         }
     }
 }
@@ -85,10 +85,10 @@ void SimpleRoom::drawCorridors(const Room& room1, const Room& room2)
     int y2 = room2.ypos + room2.ylen / 2;
 
     for (int c = std::min(x1, x2); c <= std::max(x1, x2); ++c)
-        tiles[y1][c] = 1;
+        (*tiles)[y1][c] = 1;
 
     for (int r = std::min(y1, y2); r <= std::max(y1, y2); ++r)
-        tiles[r][x2] = 1;
+        (*tiles)[r][x2] = 1;
 }
 
 

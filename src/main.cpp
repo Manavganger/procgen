@@ -26,14 +26,12 @@ int main()
         "Tile Grid"
     );
 
-    // for some reason you have to do this to prevent type decay
-    int tiles[rows][cols] = {}; // init to zero
-    int* tilesPtr[rows];
-    for (int i = 0; i < rows; ++i)
-        tilesPtr[i] = tiles[i];
+    auto tiles = std::make_shared<std::vector<std::vector<int>>>(
+        rows, std::vector<int>(cols, 0)
+    );
 
     //procgen logic goes here
-    SimpleRoom sr(tilesPtr, 65, {5, 5}, {13, 13}, {rows, cols});
+    SimpleRoom sr(tiles, 65, {5, 5}, {13, 13}, {rows, cols});
     sr.createRooms();
 
     sf::RectangleShape tile({tileSize, tileSize});
@@ -54,7 +52,7 @@ int main()
         {
             for (int x = 0; x < cols; ++x)
             {
-                tile.setFillColor(valueToColorMap(tiles[y][x]));
+                tile.setFillColor(valueToColorMap((*tiles)[y][x]));
 
 				// set position based on top left corner 
                 tile.setPosition({

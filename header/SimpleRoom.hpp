@@ -4,11 +4,12 @@
 #include "Size.hpp"
 #include "Room.hpp"
 #include <vector>
-
+#include <memory>
 class SimpleRoom
 {
     protected:
-        int** tiles;
+        // instead of int**, use nested vectors. shared_ptr is there to prevent constructor from copying tiles grid, since we want a reference to modify the original grid
+        std::shared_ptr<std::vector<std::vector<int>>> tiles; 
         std::vector<Room> rooms;
         const int numRooms;
         const Size minSize, maxSize, gridSize;
@@ -19,7 +20,7 @@ class SimpleRoom
         void connectRoomsPrims(void);
 
     public:
-        SimpleRoom(int** tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
+        SimpleRoom(std::shared_ptr<std::vector<std::vector<int>>>& tiles, int numRooms, Size minSize, Size maxSize, Size gridSize);
         void createRooms(void);
 };
 

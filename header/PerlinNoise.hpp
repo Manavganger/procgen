@@ -12,6 +12,7 @@ class PerlinNoise
 
     public:
         PerlinNoise(int** tiles, Size gridSize);
+        generateNoise();
 };
 
 #endif

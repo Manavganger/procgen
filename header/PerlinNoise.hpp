@@ -8,9 +8,14 @@ class PerlinNoise
     private:
         GridPtr tiles;
         Size gridSize;
+        Size noiseGridSize;
+        PerlinGrid noiseGrid;
+        int octaves;
+
+        Vector generateUnitVector(void);
 
     public:
-        PerlinNoise(GridPtr tiles, Size gridSize);
+        PerlinNoise(GridPtr tiles, Size noiseGridSize, Size gridSize, int octaves);
         void generateNoise(void);
 };
 

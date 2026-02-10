@@ -32,5 +32,6 @@ enum class TileType
 
 using TileGrid = std::vector<std::vector<TileType>>;
 using GridPtr = std::shared_ptr<TileGrid>;
+using PerlinGrid = std::vector<std::vector<Vector>>;
 
 #endif

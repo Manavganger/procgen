@@ -16,9 +16,18 @@ PerlinNoise::PerlinNoise(GridPtr tiles, Size noiseGridSize, Size gridSize, int o
 
 Vector PerlinNoise::generateUnitVector(void)
 {
-    Vector placeHolder = {1, 0};
-    return placeHolder;
+    // generate random angle. See https://stackoverflow.com/questions/288739/generate-random-numbers-uniformly-over-an-entire-range#20136256
+
+    static std::mt19937 rng(std::random_device{}());
+    static std::uniform_real_distribution<float> dist(0.0f, 2.0f * PI);
+    float theta = dist(rng);
+    
+    Vector v;
+    v.x = cos(theta);
+    v.y = sin(theta);
+    return v;
 }
+
 // idea is to create noise values, [-1, 1], and then use a threshold, T, to determine what's 'land'
 // and what's 'water'. Anything lower than T is water; anything higher, land. Note that 2 maps to, 
 // water, 3 maps to land. 

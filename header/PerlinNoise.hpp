@@ -15,6 +15,8 @@ class PerlinNoise
 
         std::array<Vector, 4> findOffsets(float x, float y);
         float dot(Vector& v1, Vector& v2);
+        float clamp(float x, float lowerlimit = 0.0f, float upperlimit = 1.0f);
+        float smoothstep(float edge0, float edge1, float x);
         Vector generateUnitVector(void);
 
     public:

@@ -52,6 +52,22 @@ std::array<Vector, 4> PerlinNoise::findOffsets(float x, float y)
         {x - x1, y - y1}
     }};
 }
+
+float PerlinNoise::smoothstep(float edge0, float edge1, float x) 
+{
+    // Scale, and clamp x to 0..1 range
+    x = clamp((x - edge0) / (edge1 - edge0));
+
+    return x * x * (3.0f - 2.0f * x);
+}
+
+float PerlinNoise::clamp(float x, float lowerlimit, float upperlimit) 
+{
+    if (x < lowerlimit) return lowerlimit;
+    if (x > upperlimit) return upperlimit;
+    return x;
+}
+
 // idea is to create noise values, [-1, 1], and then use a threshold, T, to determine what's 'land'
 // and what's 'water'. Anything lower than T is water; anything higher, land.
 void PerlinNoise::generateNoise(void)

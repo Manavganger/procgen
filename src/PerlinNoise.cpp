@@ -32,20 +32,25 @@ float PerlinNoise::dot(Vector& v1, Vector& v2)
     return (v1.x * v2.x) + (v1.y + v2.y);
 }
 
-std::array<int, 8> PerlinNoise::findCorners(float x, float y)
+std::array<Vector, 4> PerlinNoise::findOffsets(float x, float y)
 {
-    if (x < 0 or x >= gridSize.cols or y < 0 or y >= gridSize.rows)
+    if (x < 0 or x >= gridSize.cols - 1 or y < 0 or y >= gridSize.rows - 1)
     {
         return {};
     }
 
-    int x0 = static_cast<int>(std::floor(x));
-    int y0 = static_cast<int>(std::floor(y));
+    float x0 = std::floor(x);
+    float y0 = std::floor(y);
 
-    int x1 = x0 + 1;
-    int y1 = y0 + 1;
+    float x1 = x0 + 1.0f;
+    float y1 = y0 + 1.0f;
 
-    return {x0, y0, x0, y1, x1, y0, x1, y1};
+    return {{
+        {x - x0, y - y0},
+        {x - x1, y - y0},
+        {x - x0, y - y1},
+        {x - x1, y - y1}
+    }};
 }
 // idea is to create noise values, [-1, 1], and then use a threshold, T, to determine what's 'land'
 // and what's 'water'. Anything lower than T is water; anything higher, land.

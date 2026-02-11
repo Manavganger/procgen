@@ -1,13 +1,13 @@
 #include "../header/PerlinNoise.hpp"
 
-PerlinNoise::PerlinNoise(GridPtr tiles, Size noiseGridSize, Size gridSize, int octaves) 
-    : tiles(tiles), noiseGridSize(noiseGridSize), gridSize(gridSize), octaves(octaves)
+PerlinNoise::PerlinNoise(GridPtr tiles, Size gridSize, int octaves) 
+    : tiles(tiles), gridSize(gridSize), octaves(octaves)
 {
-    noiseGrid.resize(noiseGridSize.rows);
-    for (int r = 0; r < noiseGridSize.rows; ++r)
+    noiseGrid.resize(gridSize.rows);
+    for (int r = 0; r < gridSize.rows; ++r)
     {
-        noiseGrid[r].resize(noiseGridSize.cols);
-        for (int c = 0; c < noiseGridSize.cols; ++c)
+        noiseGrid[r].resize(gridSize.cols);
+        for (int c = 0; c < gridSize.cols; ++c)
         {
             noiseGrid[r][c] = generateUnitVector();
         }
@@ -34,7 +34,7 @@ float PerlinNoise::dot(Vector& v1, Vector& v2)
 
 std::array<float, 8> PerlinNoise::findCorners(float x, float y)
 {
-    if (x < 0 or x >= noiseGridSize.cols or y < 0 or y >= noiseGridSize.rows)
+    if (x < 0 or x >= gridSize.cols or y < 0 or y >= gridSize.rows)
     {
         return {};
     }

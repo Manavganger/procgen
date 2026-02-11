@@ -32,18 +32,18 @@ float PerlinNoise::dot(Vector& v1, Vector& v2)
     return (v1.x * v2.x) + (v1.y + v2.y);
 }
 
-std::array<float, 8> PerlinNoise::findCorners(float x, float y)
+std::array<int, 8> PerlinNoise::findCorners(float x, float y)
 {
     if (x < 0 or x >= gridSize.cols or y < 0 or y >= gridSize.rows)
     {
         return {};
     }
 
-    float x0 = std::floor(x);
-    float y0 = std::floor(y);
+    int x0 = static_cast<int>(std::floor(x));
+    int y0 = static_cast<int>(std::floor(y));
 
-    float x1 = x0 + 1.0f;
-    float y1 = y0 + 1.0f;
+    int x1 = x0 + 1;
+    int y1 = y0 + 1;
 
     return {x0, y0, x0, y1, x1, y0, x1, y1};
 }

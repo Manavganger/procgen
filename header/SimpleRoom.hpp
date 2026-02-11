@@ -2,6 +2,7 @@
 #define SIMPLE_ROOM_HPP
 
 #include "Common.hpp"
+
 class SimpleRoom
 {
     protected:

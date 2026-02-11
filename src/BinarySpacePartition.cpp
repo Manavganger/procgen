@@ -1,7 +1,5 @@
 #include "../header/BinarySpacePartition.hpp"
-#include <cstdlib>
-#include <ctime>
-#include <algorithm>
+
 
 BinarySpacePartition::BinarySpacePartition(GridPtr tiles, int numRooms, Size minSize, Size maxSize, Size gridSize)
     : SimpleRoom(tiles, numRooms, minSize, maxSize, gridSize)

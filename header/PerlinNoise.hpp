@@ -2,6 +2,8 @@
 #define PERLIN_NOISE_HPP
 
 #include "Common.hpp"
+#include <random>
+#include <cmath>
 
 class PerlinNoise
 {
@@ -12,6 +14,8 @@ class PerlinNoise
         PerlinGrid noiseGrid;
         int octaves;
 
+        std::array<float, 8> findCorners(float x, float y);
+        float dot(Vector& v1, Vector& v2);
         Vector generateUnitVector(void);
 
     public:

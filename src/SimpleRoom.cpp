@@ -1,6 +1,4 @@
 #include "../header/SimpleRoom.hpp"
-#include <cstdlib> 
-#include <ctime>   
 
 // Constructor
 SimpleRoom::SimpleRoom(GridPtr tiles, const int numRooms, const Size minSize, const Size maxSize, const Size gridSize)

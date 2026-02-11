@@ -3,6 +3,7 @@
 
 #include "SimpleRoom.hpp"
 #include "BSPNode.hpp"
+#include <algorithm>
 
 class BinarySpacePartition : public SimpleRoom
 {

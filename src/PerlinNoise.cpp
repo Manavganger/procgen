@@ -1,7 +1,7 @@
 #include "../header/PerlinNoise.hpp"
 
-PerlinNoise::PerlinNoise(GridPtr tiles, Size gridSize, int octaves) 
-    : tiles(tiles), gridSize(gridSize), octaves(octaves)
+PerlinNoise::PerlinNoise(GridPtr tiles, Size gridSize, int octaves, float noiseScale) 
+    : tiles(tiles), gridSize(gridSize), octaves(octaves), noiseScale(noiseScale)
 {
     noiseGrid.resize(gridSize.rows);
     for (int r = 0; r < gridSize.rows; ++r)
@@ -68,46 +68,74 @@ float PerlinNoise::clamp(float x, float lowerlimit, float upperlimit)
     return x;
 }
 
+float PerlinNoise::addOctaves(float x, float y)
+{
+    float total = 0.0f;
+    float frequency = 1.0f;
+    float amplitude = 1.0f;
+    float maxAmplitude = 0.0f;
+
+    for (int o = 0; o < octaves; ++o)
+    {
+        // sample noise at current frequency
+        float sampleX = x * frequency * noiseScale;
+        float sampleY = y * frequency * noiseScale;
+
+        int ix = static_cast<int>(std::floor(sampleX));
+        int iy = static_cast<int>(std::floor(sampleY));
+
+        if (ix < 0 or ix >= gridSize.rows - 1 or iy < 0 or iy >= gridSize.cols - 1)
+        {
+            continue;
+        }
+
+        std::array<Vector, 4> offsets = findOffsets(sampleX, sampleY);
+        std::array<float, 4> dotProducts = {
+            dot(offsets[0], noiseGrid[ix][iy]),
+            dot(offsets[1], noiseGrid[ix + 1][iy]),
+            dot(offsets[2], noiseGrid[ix][iy + 1]),
+            dot(offsets[3], noiseGrid[ix + 1][iy + 1]),
+        };
+
+        // cubic interpolation
+        float sx = smoothstep(0.0f, 1.0f, offsets[0].x);
+        float sy = smoothstep(0.0f, 1.0f, offsets[0].y);
+
+        float ix0 = dotProducts[0] * (1.0f - sx) + dotProducts[1] * sx;
+        float ix1 = dotProducts[2] * (1.0f - sx) + dotProducts[3] * sx;
+        float value = ix0 * (1.0f - sy) + ix1 * sy;
+
+        total += value * amplitude;
+        maxAmplitude += amplitude;
+
+        amplitude *= 0.5f;  // each additional octave should count for half as much as the previous one 
+        frequency *= 2.0f;  // octaves, by definition, are double the frequency
+    }
+
+    return (maxAmplitude > 0) ? (total / maxAmplitude) : 0.0f; // normalize to [-1,1]
+}
+
 // idea is to create noise values, [-1, 1], and then use a threshold, T, to determine what's 'land'
 // and what's 'water'. Anything lower than T is water; anything higher, land.
 void PerlinNoise::generateNoise(void)
 {
-    const float T = 0.0f;
+    const float T = -0.05f; // threshold for water vs land
+
     for (int r = 0; r < gridSize.rows - 1; ++r)
     {
-        for (int c = 0; c < gridSize.cols - 1 ; ++c)
+        for (int c = 0; c < gridSize.cols - 1; ++c)
         {
-            // use middle of tile as candidate point 
+            // use the center of the tile as the candidate point
             float x = r + 0.5f;
             float y = c + 0.5f;
 
-            // get corners
-            // TODO: bounds checking 
-            // x_0 = std::floor(x);
-            // y_0 = std::floor(y);
-            // x_1 = x_0 + 1;
-            // y_1 = y_0 + 1;
+            // compute noise value with multiple octaves
+            float value = addOctaves(x, y);
 
-            // dot product b/w unit gradient vectors and offsets
-            std::array<Vector, 4> offsets = findOffsets(x, y);
-            std::array<float, 4> dotProducts = {
-                dot(offsets[0], noiseGrid[r][c]),
-                dot(offsets[1], noiseGrid[r + 1][c]),
-                dot(offsets[2], noiseGrid[r][c + 1]),
-                dot(offsets[3], noiseGrid[r + 1][c + 1]),
-            };
-    
-            // cubic interpolation 
-            float sx = smoothstep(0.0f, 1.0f, offsets[0].x);
-            float sy = smoothstep(0.0f, 1.0f, offsets[0].y);
-
-            float ix0 = dotProducts[0] * (1.0f - sx) + dotProducts[1] * sx; // bottom
-            float ix1 = dotProducts[2] * (1.0f - sx) + dotProducts[3] * sx; // top
-            float value = ix0 * (1.0f - sy) + ix1 * sy;                     // final interpolated
-
-            (*tiles)[r][c] = (value < 0) ? TileType::Water : TileType::Grass; 
-
+            // assign tile type based on threshold
+            (*tiles)[r][c] = (value < T) ? TileType::Water : TileType::Grass;
         }
     }
 }
+
 

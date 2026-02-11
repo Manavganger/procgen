@@ -29,7 +29,7 @@ Vector PerlinNoise::generateUnitVector(void)
 
 float PerlinNoise::dot(Vector& v1, Vector& v2)
 {
-    return (v1.x * v2.x) + (v1.y + v2.y);
+    return (v1.x * v2.x) + (v1.y * v2.y);
 }
 
 std::array<Vector, 4> PerlinNoise::findOffsets(float x, float y)
@@ -72,6 +72,42 @@ float PerlinNoise::clamp(float x, float lowerlimit, float upperlimit)
 // and what's 'water'. Anything lower than T is water; anything higher, land.
 void PerlinNoise::generateNoise(void)
 {
+    const float T = 0.0f;
+    for (int r = 0; r < gridSize.rows - 1; ++r)
+    {
+        for (int c = 0; c < gridSize.cols - 1 ; ++c)
+        {
+            // use middle of tile as candidate point 
+            float x = r + 0.5f;
+            float y = c + 0.5f;
+
+            // get corners
+            // TODO: bounds checking 
+            // x_0 = std::floor(x);
+            // y_0 = std::floor(y);
+            // x_1 = x_0 + 1;
+            // y_1 = y_0 + 1;
+
+            // dot product b/w unit gradient vectors and offsets
+            std::array<Vector, 4> offsets = findOffsets(x, y);
+            std::array<float, 4> dotProducts = {
+                dot(offsets[0], noiseGrid[r][c]),
+                dot(offsets[1], noiseGrid[r + 1][c]),
+                dot(offsets[2], noiseGrid[r][c + 1]),
+                dot(offsets[3], noiseGrid[r + 1][c + 1]),
+            };
     
+            // cubic interpolation 
+            float sx = smoothstep(0.0f, 1.0f, offsets[0].x);
+            float sy = smoothstep(0.0f, 1.0f, offsets[0].y);
+
+            float ix0 = dotProducts[0] * (1.0f - sx) + dotProducts[1] * sx; // bottom
+            float ix1 = dotProducts[2] * (1.0f - sx) + dotProducts[3] * sx; // top
+            float value = ix0 * (1.0f - sy) + ix1 * sy;                     // final interpolated
+
+            (*tiles)[r][c] = (value < 0) ? TileType::Water : TileType::Grass; 
+
+        }
+    }
 }
 

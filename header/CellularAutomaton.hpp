@@ -7,7 +7,7 @@ class CellularAutomaton
     private:
         const Size maxSize;
         const int iterations;
-        GridPtr tiles;
+        GridPtr currState;
         GridPtr prevState;
 
         int countAliveNeighbors(int r, int c);

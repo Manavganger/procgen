@@ -10,7 +10,7 @@ class CellularAutomaton
         GridPtr tiles;
 
     public:
-        CellularAutomaton(GridPtr tiles, Size maxSiz, int iterations);
+        CellularAutomaton(GridPtr tiles, Size maxSize, int iterations);
         void updateGrid(void);
 };
 #endif

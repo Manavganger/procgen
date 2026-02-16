@@ -55,13 +55,16 @@ TileType CellularAutomaton::neighborsToState(int aliveNeighborCount)
 // If enough tiles are walls, then it becomes a wall. All tiles updated 'simultaneously', so previous state is remembered.
 void CellularAutomaton::updateGrid(void)
 {
-    for (int r = 0; r < maxSize.rows; ++r)
+    for (int i = 0; i < iterations; ++i)
     {
-        for (int c = 0; c < maxSize.cols; ++c)
+        for (int r = 0; r < maxSize.rows; ++r)
         {
-            int count = countAliveNeighbors(r, c);
-            (*currState)[r][c] = neighborsToState(count);
+            for (int c = 0; c < maxSize.cols; ++c)
+            {
+                int count = countAliveNeighbors(r, c);
+                (*currState)[r][c] = neighborsToState(count);
+            }
         }
+        std::swap(currState, prevState);
     }
-   std::swap(currState, prevState);
 }

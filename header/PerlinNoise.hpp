@@ -2,8 +2,6 @@
 #define PERLIN_NOISE_HPP
 
 #include "Common.hpp"
-#include <random>
-#include <cmath>
 
 class PerlinNoise
 {

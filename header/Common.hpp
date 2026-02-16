@@ -4,7 +4,10 @@
 #include <vector>
 #include <memory>
 #include <cstdlib> 
-#include <ctime>   
+#include <ctime>
+#include <random>
+#include <cmath>
+
 // does NOT specify location, only size
 struct Size
 {

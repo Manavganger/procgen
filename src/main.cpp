@@ -14,11 +14,11 @@ sf::Color valueToColorMap(TileType value)
 
 int main()
 {
-    const int tileSize = 20;
+    const int tileSize = 10;
     const int gap = 0;
     const int margin = 10; // can remove later
-    const int cols = 60;
-    const int rows = 45;
+    const int cols = 200;
+    const int rows = 100;
 
     const int windowWidth  = margin * 2 + cols * tileSize + (cols - 1) * gap;
     const int windowHeight = margin * 2 + rows * tileSize + (rows - 1) * gap;
@@ -33,7 +33,7 @@ int main()
     );
 
     //procgen logic goes here
-    PerlinNoise pn(tiles, {rows, cols}, 4, 1.0f);
+    PerlinNoise pn(tiles, {rows, cols}, 100, 1.0f);
     pn.generateNoise();
 
     sf::RectangleShape tile({tileSize, tileSize});

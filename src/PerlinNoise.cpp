@@ -119,7 +119,7 @@ float PerlinNoise::addOctaves(float x, float y)
 // and what's 'water'. Anything lower than T is water; anything higher, land.
 void PerlinNoise::generateNoise(void)
 {
-    const float T = -0.05f; // threshold for water vs land
+    const float T = -0.1f; // threshold for water vs land
 
     for (int r = 0; r < gridSize.rows - 1; ++r)
     {
@@ -133,7 +133,7 @@ void PerlinNoise::generateNoise(void)
             float value = addOctaves(x, y);
 
             // assign tile type based on threshold
-            (*tiles)[r][c] = (value < T) ? TileType::Water : TileType::Grass;
+            (*tiles)[r][c] = (value > T) ? TileType::Water : TileType::Grass;
         }
     }
 }

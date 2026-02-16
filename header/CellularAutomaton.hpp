@@ -8,6 +8,10 @@ class CellularAutomaton
         const Size maxSize;
         const int iterations;
         GridPtr tiles;
+        GridPtr prevState;
+
+        int countAliveNeighbors(int r, int c);
+        TileType neighborsToState(int aliveNeighborCount);
 
     public:
         CellularAutomaton(GridPtr tiles, Size maxSize, int iterations);

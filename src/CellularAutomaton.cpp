@@ -14,7 +14,7 @@ CellularAutomaton::CellularAutomaton(GridPtr tiles, Size maxSize, int iterations
             (*prevState)[r][c] = dist(rng) ? TileType::Wall : TileType::Open;
         }
     }
-    currState = std::make_shared<Grid>(*prevState);
+    currState = std::make_shared<TileGrid>(*prevState);
 }
 
 int CellularAutomaton::countAliveNeighbors(int r, int c)

@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "../header/PerlinNoise.hpp"
+#include "../header/CellularAutomaton.hpp"
 
 sf::Color valueToColorMap(TileType value)
 {
@@ -33,8 +33,8 @@ int main()
     );
 
     //procgen logic goes here
-    PerlinNoise pn(tiles, {rows, cols}, 100, 1.0f);
-    pn.generateNoise();
+    CellularAutomaton ca(tiles, {rows, cols}, 10);
+    ca.updateGrid();
 
     sf::RectangleShape tile({tileSize, tileSize});
 

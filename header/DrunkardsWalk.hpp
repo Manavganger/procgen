@@ -15,9 +15,10 @@ class DrunkardsWalk
         std::vector<Position> visitedList;
 
         const bool enoughGridCover(void);
-        const bool checkVisited(int r, int c);
+        const bool checkVisited(Position p);
         const int[] getRandomTile(void);
-        void addVisited(int r, int c);
+        void addVisited(Position p);
+        void drunkWalkIteration(Position p);
 
     public:
         DrunkardsWalk(GridPtr tiles, Size maxSize, int walkLen, float minCover);

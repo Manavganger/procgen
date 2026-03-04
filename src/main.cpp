@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "../header/CellularAutomaton.hpp"
+#include "../header/DrunkardsWalk.hpp"
 
 sf::Color valueToColorMap(TileType value)
 {
@@ -32,9 +32,17 @@ int main()
         rows, std::vector<TileType>(cols, TileType::Wall)
     );
 
-    //procgen logic goes here
-    CellularAutomaton ca(tiles, {rows, cols}, 10);
-    ca.updateGrid();
+    //===========================================
+    //          PROCGEN LOGIC GOES HERE
+    //===========================================
+
+    DrunkardsWalk dw(tiles, {rows, cols}, 15, 0.3f);
+    dw.updateGrid();
+
+    //===========================================
+    //           PROCGEN LOGIC END
+    //===========================================
+
 
     sf::RectangleShape tile({tileSize, tileSize});
 

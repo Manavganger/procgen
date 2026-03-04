@@ -17,10 +17,10 @@ CellularAutomaton::CellularAutomaton(GridPtr tiles, Size maxSize, int iterations
     currState = std::make_shared<TileGrid>(*prevState);
 }
 
-int CellularAutomaton::countAliveNeighbors(int r, int c)
+int CellularAutomaton::countAliveNeighbors(Position p)
 {
     int count = 0;
-
+    
     for (int dr = -1; dr <= 1; ++dr)
     {
         for (int dc = -1; dc <= 1; ++dc)
@@ -29,8 +29,8 @@ int CellularAutomaton::countAliveNeighbors(int r, int c)
             if (dr == 0 and dc == 0)
                 continue;
 
-            int nr = r + dr;
-            int nc = c + dc;
+            int nr = p.row + dr;
+            int nc = p.col + dc;
 
             if (nr >= 0 and nr < maxSize.rows and nc >= 0 and nc < maxSize.cols)
             {
@@ -61,7 +61,7 @@ void CellularAutomaton::updateGrid(void)
         {
             for (int c = 0; c < maxSize.cols; ++c)
             {
-                int count = countAliveNeighbors(r, c);
+                int count = countAliveNeighbors({r, c});
                 (*currState)[r][c] = neighborsToState(count);
             }
         }

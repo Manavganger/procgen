@@ -14,6 +14,12 @@ struct Size
     int rows, cols;
 };
 
+// specifies location, NOT size
+struct Position
+{
+    int row, col; 
+};
+
 struct Vector
 {
     float x, y;

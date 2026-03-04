@@ -10,7 +10,7 @@ class CellularAutomaton
         GridPtr currState;
         GridPtr prevState;
 
-        int countAliveNeighbors(int r, int c);
+        int countAliveNeighbors(Position p);
         TileType neighborsToState(int aliveNeighborCount);
 
     public:

@@ -8,7 +8,7 @@ DrunkardsWalk::DrunkardsWalk(GridPtr tiles, Size maxSize, int walkLen, float min
     visited(maxSize.rows * maxSize.cols, false)
 {}
 
-bool DrunkardsWalk::checkVisited(Position p)
+const bool DrunkardsWalk::checkVisited(Position p)
 {
     return visited[maxSize.rows * p.row + p.col];
 }
@@ -16,10 +16,10 @@ bool DrunkardsWalk::checkVisited(Position p)
 void DrunkardsWalk::addVisited(Position p)
 {
     visited[maxSize.rows * p.row + p.col] = true;
-    visitedList.emplace_back({p.row, p.col});
+    visitedList.push_back({p.row, p.col});
 }
 
-bool DrunkardsWalk::enoughGridCover(void)
+const bool DrunkardsWalk::enoughGridCover(void)
 {
     return (( visitedCount / (maxSize.rows * maxSize.cols) ) >= minCover);
 }
@@ -63,7 +63,7 @@ void DrunkardsWalk::drunkWalkIteration(Position p)
         // immediately stop if out of bounds
         if (curr.row >= maxSize.rows or curr.col >= maxSize.cols or curr.row <= 0 or curr.col <= 0)
         {
-            return 
+            return;
         }
 
         addVisited(curr);
@@ -87,9 +87,9 @@ void DrunkardsWalk::updateGrid(void)
     int c = rand() % maxSize.cols;
     drunkWalkIteration({r, c});
 
-    while !(enoughGridCover())
+    while (!enoughGridCover())
     {
         Position p = getRandomTile();
-        drunkWalkIteration(p)
+        drunkWalkIteration(p);
     }
 }

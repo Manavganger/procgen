@@ -16,13 +16,13 @@ class DrunkardsWalk
 
         const bool enoughGridCover(void);
         const bool checkVisited(Position p);
-        const int[] getRandomTile(void);
+        Position getRandomTile(void);
         void addVisited(Position p);
         void drunkWalkIteration(Position p);
 
     public:
         DrunkardsWalk(GridPtr tiles, Size maxSize, int walkLen, float minCover);
         void updateGrid(void);
-}
+};
 
 #endif

@@ -15,13 +15,17 @@ const bool DrunkardsWalk::checkVisited(Position p)
 
 void DrunkardsWalk::addVisited(Position p)
 {
+    if ( checkVisited(p) ) {
+        return;
+    }
     visited[maxSize.rows * p.row + p.col] = true;
     visitedList.push_back({p.row, p.col});
+    visitedCount++;
 }
 
 const bool DrunkardsWalk::enoughGridCover(void)
 {
-    return (( visitedCount / (maxSize.rows * maxSize.cols) ) >= minCover);
+    return (( 1.0f * visitedCount / (maxSize.rows * maxSize.cols) ) >= minCover);
 }
 
 Position DrunkardsWalk::getRandomTile(void)
@@ -61,11 +65,11 @@ void DrunkardsWalk::drunkWalkIteration(Position p)
         }
 
         // immediately stop if out of bounds
-        if (curr.row >= maxSize.rows or curr.col >= maxSize.cols or curr.row <= 0 or curr.col <= 0)
+        if (curr.row >= maxSize.rows or curr.col >= maxSize.cols or curr.row < 0 or curr.col < 0)
         {
             return;
         }
-
+        (*tiles)[curr.row][curr.col] = TileType::Open;
         addVisited(curr);
     }
 }

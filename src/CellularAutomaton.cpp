@@ -11,7 +11,7 @@ CellularAutomaton::CellularAutomaton(GridPtr tiles, Size maxSize, int iterations
     {
         for (int c = 0; c < maxSize.cols; ++c)
         {
-            (*prevState)[r][c] = dist(rng) ? TileType::Wall : TileType::Open;
+            (*prevState)[r][c] = dist(rng) ? TileType::Grass : TileType::Water;
         }
     }
     currState = std::make_shared<TileGrid>(*prevState);
@@ -34,7 +34,7 @@ int CellularAutomaton::countAliveNeighbors(int r, int c)
 
             if (nr >= 0 and nr < maxSize.rows and nc >= 0 and nc < maxSize.cols)
             {
-                if ((*prevState)[nr][nc] == TileType::Wall)
+                if ((*prevState)[nr][nc] == TileType::Grass)
                 {
                     ++count;
                 }
@@ -48,7 +48,7 @@ int CellularAutomaton::countAliveNeighbors(int r, int c)
 
 TileType CellularAutomaton::neighborsToState(int aliveNeighborCount)
 {
-    return (aliveNeighborCount <= 4) ? TileType::Wall : TileType::Open;
+    return (aliveNeighborCount <= 4) ? TileType::Grass : TileType::Water;
 }
 
 // plays "game of life" with given grid. For a given tile, if enough tiles around it are open, it will also become open.
